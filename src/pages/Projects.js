@@ -2,39 +2,31 @@ import React from 'react';
 import ProjectCard from '../components/ProjectCard';
 
 const Projects = () => {
-  const projects = [
-    {
-      title: 'Sistema de Reservas',
-      description: 'Gestión de reservas para hoteles y restaurantes con control de disponibilidad.',
-      link: '#'
-    },
-    {
-      title: 'API de Recomendación',
-      description: 'Motor de recomendaciones usando machine learning para productos y contenido.',
-      link: '#'
-    },
-    {
-      title: 'Aplicación de Recetas',
-      description: 'Buscador y creador de recetas con filtros avanzados.',
-      link: '#'
-    },
-    {
-      title: 'Galería de Imágenes',
-      description: 'Galería con scroll infinito para visualizar imágenes.',
-      link: '#'
-    }
-  ];
-
   return (
-    <section id="projects" className="p-6 bg-gray-100 dark:bg-gray-900">
-      <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">Mis Proyectos</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {projects.map((project, index) => (
-          <ProjectCard key={index} project={project} />
-        ))}
+    <section id="projects" className="py-16 px-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+      <div className="container mx-auto max-w-6xl">
+        <h2 className="text-4xl font-extrabold mb-12 text-center tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105">
+          Mis Proyectos
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+          <ProjectCard
+            title="Sistema de Reservas"
+            description="Aplicación moderna para gestionar reservas en hoteles, restaurantes o eventos, con una interfaz fluida y amigable."
+          />
+          <ProjectCard
+            title="Aplicación de Recetas"
+            description="Busca y crea recetas con filtros avanzados por ingredientes, con una experiencia visual única."
+          />
+          <ProjectCard
+            title="Galería de Imágenes"
+            description="Galería con scroll infinito, presentando imágenes en un formato limpio y minimalista."
+          />
+          {/* Agrega más ProjectCards aquí si es necesario */}
+        </div>
       </div>
     </section>
   );
 };
 
 export default Projects;
+
