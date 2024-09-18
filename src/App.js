@@ -1,8 +1,27 @@
+import React from 'react';
+import { ThemeProvider } from './components/ThemeContext';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import About from './pages/About';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
+import './styles/tailwind.css';
+
 function App() {
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-blue-600 ">¡Hola, Tailwind!</h1>
+    <ThemeProvider>
+      <div className="App">
+      <Header />
+      <main>
+        <Home />
+        <About />
+        <Projects />
+        <Contact />
+      </main>
+      <Footer />
     </div>
+    </ThemeProvider>
   );
 }
 
