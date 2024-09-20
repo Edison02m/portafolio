@@ -1,121 +1,147 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code, Database, Palette, Globe } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Linkedin, Twitter, Github, Mail } from 'lucide-react';
 import imagen from '../assets/images/imagen.jpg';
 
 const HomeAbout = () => {
-  const skills = [
-    { category: 'Lenguajes', icon: Code, color: 'blue', items: ['JavaScript', 'Python', 'Java'] },
-    { category: 'Frameworks', icon: Globe, color: 'green', items: ['React', 'Node.js', 'Django'] },
-    { category: 'Bases de Datos', icon: Database, color: 'purple', items: ['MySQL', 'MongoDB', 'PostgreSQL'] },
-    { category: 'Herramientas', icon: Palette, color: 'yellow', items: ['Git', 'Docker', 'AWS'] },
+  const [greeting, setGreeting] = useState('');
+  const [showName, setShowName] = useState(false);
+
+  const socialLinks = [
+    { Icon: Linkedin, href: "https://linkedin.com/in/tu-perfil", label: "LinkedIn" },
+    { Icon: Twitter, href: "https://twitter.com/tu-perfil", label: "Twitter" },
+    { Icon: Github, href: "https://github.com/tu-perfil", label: "GitHub" },
+    { Icon: Mail, href: "mailto:tu-email@ejemplo.com", label: "Email" },
   ];
 
-  return (
-    <div className="relative min-h-screen flex flex-col justify-center items-center p-4 bg-gray-50 dark:bg-gray-900 text-gray-200 dark:text-gray-400 overflow-hidden">
-      {/* Fondo animado */}
-      <motion.div
-        className="absolute inset-0 z-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.1 }}
-        transition={{ duration: 1.5 }}
-      >
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute bg-gradient-to-br from-blue-400 to-purple-400 rounded-full opacity-50"
-            style={{
-              width: Math.random() * 100 + 50 + 'px',
-              height: Math.random() * 100 + 50 + 'px',
-              top: Math.random() * 100 + '%',
-              left: Math.random() * 100 + '%',
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 360],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
-          />
-        ))}
-      </motion.div>
+  useEffect(() => {
+    const greetings = ["¡Hola!", "Hello!", "Bonjour!", "Ciao!", "こんにちは!"];
+    let index = 0;
+    const intervalId = setInterval(() => {
+      setGreeting(greetings[index]);
+      index = (index + 1) % greetings.length;
+      if (index === 0) {
+        clearInterval(intervalId);
+        setTimeout(() => setShowName(true), 500);
+      }
+    }, 300);
+    return () => clearInterval(intervalId);
+  }, []);
 
-      {/* Contenido principal */}
+  const buttonVariants = {
+    hidden: { opacity: 0, scale: 0 },
+    visible: (i) => ({
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delay: 1 + (i * 0.2),
+        type: 'spring',
+        stiffness: 120,
+        damping: 10
+      }
+    }),
+    hover: {
+      scale: 1.1,
+      transition: {
+        duration: 0.2
+      }
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4 text-gray-800 dark:text-gray-200">
       <motion.div 
-        className="relative z-10 flex flex-col md:flex-row items-center mb-12 space-y-8 md:space-y-0 md:space-x-12"
+        className="flex flex-col md:flex-row items-center md:items-start justify-center max-w-4xl w-full"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 1 }}
       >
+        {/* Photo */}
         <motion.div
-          className="relative w-48 h-48 rounded-full overflow-hidden"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          className="w-48 h-48 mb-6 md:mb-0 md:mr-8 relative flex-shrink-0"
+          whileHover={{ scale: 1.1 }}
+          transition={{ duration: 0.3 }}
         >
           <img
             src={imagen}
             alt="Edison Azogue"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-lg shadow-lg"
           />
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 opacity-0"
-            whileHover={{ opacity: 0.3 }}
-            transition={{ duration: 0.3 }}
-          />
+          <div className="absolute inset-0 bg-blue-500 mix-blend-overlay opacity-20 rounded-lg" />
         </motion.div>
-        <div className="text-center md:text-left">
-          <motion.h1
-            className="text-4xl lg:text-5xl font-bold pb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
+
+        {/* Content */}
+        <div className="flex flex-col items-center md:items-center text-center">
+          <AnimatePresence mode="wait">
+            {!showName ? (
+              <motion.h2
+                key="greeting"
+                className="text-3xl font-sans text-gray-800 dark:text-gray-200 mb-2"
+                initial={{ x: '-100vw' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100vw' }}
+                transition={{ type: 'spring', stiffness: 60, duration: 0.5 }}
+              >
+                {greeting}
+              </motion.h2>
+            ) : (
+              <motion.h1
+                key="name"
+                className="text-4xl font-sans font-bold text-gray-900 dark:text-gray-100 mb-2"
+                initial={{ x: '100vw' }}
+                animate={{ x: 0 }}
+                transition={{ type: 'spring', stiffness: 60, duration: 0.5 }}
+              >
+                Edison Azogue
+              </motion.h1>
+            )}
+          </AnimatePresence>
+
+          <motion.p 
+            className="text-xl font-sans text-gray-600 dark:text-gray-400 mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Edison Azogue
-          </motion.h1>
-          <motion.p
-            className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
           >
             Desarrollador Full Stack & Diseñador UX
           </motion.p>
-        </div>
-      </motion.div>
 
-      <motion.div 
-        className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl w-full"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-      >
-        {skills.map(({ category, icon: Icon, color, items }, index) => (
-          <motion.div 
-            key={category}
-            className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col items-center justify-center text-center`}
-            whileHover={{ y: -5, boxShadow: '0 10px 20px rgba(0,0,0,0.1)' }}
+          <motion.div
+            className="max-w-lg mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
           >
-            <Icon className={`text-${color}-500 mb-2`} size={32} />
-            <h3 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-2">{category}</h3>
-            <p className="text-xs text-gray-600 dark:text-gray-400">{items.join(', ')}</p>
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-sans">
+              Apasionado por crear experiencias digitales únicas que fusionan 
+              funcionalidad y estética. Siempre en busca de innovar y elevar 
+              la calidad en cada proyecto de desarrollo web y diseño de interfaces.
+            </p>
           </motion.div>
-        ))}
-      </motion.div>
 
-      <motion.p 
-        className="relative z-10 mt-12 text-center text-gray-700 dark:text-gray-300 max-w-2xl text-sm"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-      >
-        Creando soluciones innovadoras y eficientes en la vanguardia del desarrollo de software.
-      </motion.p>
+          <motion.div 
+            className="flex justify-center space-x-4"
+          >
+            {socialLinks.map(({ Icon, href, label }, index) => (
+              <motion.a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-300
+                           bg-gray-800 dark:bg-white hover:bg-gray-700 dark:hover:bg-gray-100"
+                variants={buttonVariants}
+                custom={index}
+                initial="hidden"
+                animate="visible"
+                whileHover="hover"
+              >
+                <Icon size={20} className="text-white dark:text-gray-800" />
+              </motion.a>
+            ))}
+          </motion.div>
+        </div>
+      </motion.div>
     </div>
   );
 };

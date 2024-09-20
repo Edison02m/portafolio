@@ -3,7 +3,7 @@ import ProjectCard from '../components/ProjectCard';
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-16 px-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <section id="projects" className="py-16 px-4  text-gray-900 dark:text-gray-100">
       <div className="container mx-auto max-w-6xl">
         <h2 className="text-4xl font-extrabold mb-12 text-center tracking-wide transition-all duration-300 ease-in-out transform hover:scale-105">
           Mis Proyectos
