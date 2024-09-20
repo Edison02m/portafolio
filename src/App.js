@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from './components/ThemeContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home'; // Componente que tiene HomeAbout dentro
-import About from './pages/About'; // Otros componentes
+import HomeAbout from './pages/Home'; // Asegúrate de que esté bien importado
+import About from './pages/About'; // Otros componentes como la sección About
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import './styles/tailwind.css';
@@ -39,13 +39,22 @@ function App() {
         ></div>
 
         {/* Contenido principal (encima del fondo interactivo) */}
-        <div className="relative z-10">
+        <div className="relative z-10 pb-">
           <Header />
-          <main >
-          <section id="inicio" className="min-h-screen pt-8 sm:pt-0">
-  <Home />
-</section>
+
+          {/* Sección Home que incluye HomeAbout, centrada en la pantalla */}
+          <main className=""> {/* Ajusta el padding según la altura de tu header */}
+            <section id="inicio" className="flex flex-col justify-center items-center min-h-screen">
+              <HomeAbout />
+            </section>
+
+            {/* Sección About */}
+            <section id="about" className="min-h-screen ">
+              <About />
+            </section>
           </main>
+
+
           <Footer />
         </div>
       </div>

@@ -49,7 +49,8 @@ const HomeAbout = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 text-gray-800 dark:text-gray-200 font-varela">
+    <div className="min-h-screen flex items-center justify-center pt-10 font-varela">
+
       <motion.div 
         className="flex flex-col md:flex-row items-center md:items-start justify-center max-w-4xl w-full"
         initial={{ opacity: 0, y: 20 }}
@@ -62,12 +63,14 @@ const HomeAbout = () => {
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.3 }}
         >
-          <img
-            src={imagen}
-            alt="Edison Azogue"
-            className="w-full h-full object-cover rounded-lg shadow-lg"
-          />
-          <div className="absolute inset-0 bg-blue-500 mix-blend-overlay opacity-20 rounded-lg" />
+          <div className=" p-1 bg-black dark:bg-white rounded-full shadow-xl">
+            <img
+              src={imagen}
+              alt="Edison Azogue"
+              className="w-full h-full object-cover rounded-full"
+            />
+          </div>
+          <div className="absolute inset-0 bg-blue-500 mix-blend-overlay opacity-20 rounded-full" />
         </motion.div>
 
         {/* Content */}
@@ -98,12 +101,12 @@ const HomeAbout = () => {
           </AnimatePresence>
 
           <motion.p 
-            className="text-xl font-varela text-gray-600 dark:text-gray-400 mb-4"
+            className="text-xl font-varela text-gray-500 dark:text-teal-400/50 mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
           >
-            Desarrollador Full Stack & Diseñador UX
+            Desarrollador Full Stack
           </motion.p>
 
           <motion.div
