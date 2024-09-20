@@ -42,9 +42,9 @@ function App() {
         <div className="relative z-10">
           <Header />
           <main >
-            <section id="inicio" className="min-h-screen ">
-              <Home />
-            </section>
+          <section id="inicio" className="min-h-screen pt-8 sm:pt-0">
+  <Home />
+</section>
           </main>
           <Footer />
         </div>

@@ -22,7 +22,7 @@ const HomeAbout = () => {
       index = (index + 1) % greetings.length;
       if (index === 0) {
         clearInterval(intervalId);
-        setTimeout(() => setShowName(true), 500);
+        setTimeout(() => setShowName(true), 100);
       }
     }, 300);
     return () => clearInterval(intervalId);
@@ -49,7 +49,7 @@ const HomeAbout = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 text-gray-800 dark:text-gray-200">
+    <div className="min-h-screen flex items-center justify-center p-4 text-gray-800 dark:text-gray-200 font-varela">
       <motion.div 
         className="flex flex-col md:flex-row items-center md:items-start justify-center max-w-4xl w-full"
         initial={{ opacity: 0, y: 20 }}
@@ -76,7 +76,7 @@ const HomeAbout = () => {
             {!showName ? (
               <motion.h2
                 key="greeting"
-                className="text-3xl font-sans text-gray-800 dark:text-gray-200 mb-2"
+                className="text-4xl font-varela font-bold text-gray-900 dark:text-gray-100 mb-2"
                 initial={{ x: '-100vw' }}
                 animate={{ x: 0 }}
                 exit={{ x: '100vw' }}
@@ -87,10 +87,10 @@ const HomeAbout = () => {
             ) : (
               <motion.h1
                 key="name"
-                className="text-4xl font-sans font-bold text-gray-900 dark:text-gray-100 mb-2"
-                initial={{ x: '100vw' }}
+                className="text-4xl font-varela font-bold text-gray-900 dark:text-gray-100 mb-2"
+                initial={{ x: '80vw' }}
                 animate={{ x: 0 }}
-                transition={{ type: 'spring', stiffness: 60, duration: 0.5 }}
+                transition={{ type: 'spring', stiffness: 60, duration: 0.01 }} // Duración más rápida
               >
                 Edison Azogue
               </motion.h1>
@@ -98,7 +98,7 @@ const HomeAbout = () => {
           </AnimatePresence>
 
           <motion.p 
-            className="text-xl font-sans text-gray-600 dark:text-gray-400 mb-4"
+            className="text-xl font-varela text-gray-600 dark:text-gray-400 mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.7 }}
@@ -112,7 +112,7 @@ const HomeAbout = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7 }}
           >
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-sans">
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-varela">
               Apasionado por crear experiencias digitales únicas que fusionan 
               funcionalidad y estética. Siempre en busca de innovar y elevar 
               la calidad en cada proyecto de desarrollo web y diseño de interfaces.
