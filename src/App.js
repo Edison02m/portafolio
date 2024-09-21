@@ -39,12 +39,12 @@ function App() {
         ></div>
 
         {/* Contenido principal (encima del fondo interactivo) */}
-        <div className="relative z-10 pb-">
+        <div className="relative z-10">
           <Header />
 
           {/* Sección Home que incluye HomeAbout, centrada en la pantalla */}
           <main className=""> {/* Ajusta el padding según la altura de tu header */}
-            <section id="inicio" className="flex flex-col justify-center items-center min-h-screen">
+            <section id="inicio" className="flex flex-col justify-center items-center min-h-screen -mb-12">
               <HomeAbout />
             </section>
 
