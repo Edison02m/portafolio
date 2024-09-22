@@ -1,12 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { ThemeProvider } from './components/ThemeContext';
+import { ThemeProvider, useTheme } from './components/ThemeContext';
+import { InView } from 'react-intersection-observer';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import HomeAbout from './pages/Home'; // Asegúrate de que esté bien importado
-import About from './pages/About'; // Otros componentes como la sección About
+import HomeAbout from './pages/Home';
+import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import './styles/tailwind.css';
+
+function InteractiveBackground({ mousePosition }) {
+  const { isDarkMode } = useTheme();
+
+  return (
+    <div
+      className="fixed inset-0 z-0 pointer-events-none"
+      style={{
+        background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, ${
+          isDarkMode
+            ? 'rgba(59, 130, 246, 0.2)'
+            : 'rgba(90, 130, 160, 0.3)'
+        }, rgba(0, 0, 0, 0.1))`,
+        transition: 'background 0.1s ease',
+      }}
+    ></div>
+  );
+}
+
+const BlurSection = ({ children, id }) => {
+  const [isInView, setIsInView] = useState(false);
+
+  return (
+    <InView onChange={(inView) => setIsInView(inView)} threshold={0.2}>
+      {({ ref }) => (
+        <section
+          ref={ref}
+          id={id}
+          className={`min-h-screen transition-all duration-500 ${
+            isInView ? 'blur-none' : 'blur-sm'
+          }`}
+        >
+          {children}
+        </section>
+      )}
+    </InView>
+  );
+};
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -27,39 +66,42 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider>
-      <div className="App flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 relative">
-        {/* Fondo interactivo global */}
-        <div
-          className="fixed inset-0 z-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.2), rgba(0,0 , 0, 0.1))`,
-            transition: 'background 0.1s ease',
-          }}
-        ></div>
+    <div className="App flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 relative">
+      <InteractiveBackground mousePosition={mousePosition} />
 
-        {/* Contenido principal (encima del fondo interactivo) */}
-        <div className="relative z-10">
-          <Header />
+      <div className="relative z-10">
+        <Header />
 
-          {/* Sección Home que incluye HomeAbout, centrada en la pantalla */}
-          <main className=""> {/* Ajusta el padding según la altura de tu header */}
-            <section id="inicio" className="flex flex-col justify-center items-center min-h-screen -mb-12">
+        <main className="">
+          <BlurSection id="inicio">
+            <div className="flex flex-col justify-center items-center min-h-screen -mb-12">
               <HomeAbout />
-            </section>
+            </div>
+          </BlurSection>
 
-            {/* Sección About */}
-            <section id="about" className="min-h-screen ">
-              <About />
-            </section>
-          </main>
+          <BlurSection id="about">
+            <About />
+          </BlurSection>
 
+          <BlurSection id="projects">
+            <Projects />
+          </BlurSection>
 
-          <Footer />
-        </div>
+          <BlurSection id="contact">
+            <Contact />
+          </BlurSection>
+        </main>
+
+        <Footer />
       </div>
-    </ThemeProvider>
+    </div>
   );
 }
 
-export default App;
+export default function RootApp() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
+}

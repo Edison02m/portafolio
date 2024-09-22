@@ -65,7 +65,7 @@ const About = () => {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ delay: 0.2 }}
-                className="text-gray-600 dark:text-gray-300 leading-relaxed text-base text-justify mr-10"
+                className="text-gray-600 dark:text-gray-300 leading-relaxed text-base text-justify  sm:mr-10"
               >
                 <Typewriter
                   words={[
@@ -130,7 +130,7 @@ const About = () => {
                   <motion.button
                     key={category}
                     className={`px-3 py-2 text-sm font-medium transition-all duration-300 ease-in-out relative ${activeTab === category
-                        ? 'text-blue-600 dark:text-teal-400'
+                        ? 'text-blue-700 dark:text-teal-400'
                         : 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'
                       }`}
                     onClick={() => setActiveTab(category)}
@@ -140,7 +140,7 @@ const About = () => {
                     {category}
                     {activeTab === category && (
                       <motion.div
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-600 dark:bg-teal-400"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-700 dark:bg-teal-400"
                         layoutId="underline"
                       />
                     )}
@@ -171,7 +171,7 @@ const About = () => {
 
                         transition={{ duration: 0.8 }}
                       >
-                        <tech.icon className="w-10 h-10 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-teal-600" />
+                        <tech.icon className="w-10 h-10 text-gray-600 hover:text-blue-700 dark:text-gray-400 dark:hover:text-teal-600" />
                       </motion.div>
                       <AnimatePresence>
                         {hoveredTech === tech.name && (

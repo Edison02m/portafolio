@@ -76,29 +76,29 @@ const HomeAbout = () => {
         {/* Content */}
         <div className="flex flex-col items-center md:items-center text-center">
           <AnimatePresence mode="wait">
-            {!showName ? (
-              <motion.h2
-                key="greeting"
-                className="text-4xl font-varela font-bold text-gray-900 dark:text-gray-100 mb-2"
-                initial={{ x: '-100vw' }}
-                animate={{ x: 0 }}
-                exit={{ x: '100vw' }}
-                transition={{ type: 'spring', stiffness: 60, duration: 0.5 }}
-              >
-                {greeting}
-              </motion.h2>
-            ) : (
-              <motion.h1
-                key="name"
-                className="text-4xl font-varela font-bold text-gray-900 dark:text-gray-100 mb-2"
-                initial={{ x: '80vw' }}
-                animate={{ x: 0 }}
-                transition={{ type: 'spring', stiffness: 60, duration: 0.01 }} // Duración más rápida
-              >
-                Edison Azogue
-              </motion.h1>
-            )}
-          </AnimatePresence>
+  {!showName ? (
+    <motion.h2
+      key="greeting"
+      className="text-4xl font-varela font-bold text-gray-900 dark:text-gray-100 mb-2"
+      initial={{ x: '-100vw' }}
+      animate={{ x: 0 }}
+      transition={{ type: 'spring', stiffness: 60, duration: 0.5 }}
+    >
+      {greeting}
+    </motion.h2>
+  ) : (
+    <motion.h1
+      key="name"
+      className="text-4xl font-varela font-bold text-gray-900 dark:text-gray-100 mb-2"
+      initial={{ y: 20, opacity: 0 }} // Comienza desde abajo con opacidad 0
+      animate={{ y: 0, opacity: 1 }} // Se mueve a su posición original y se vuelve opaco
+      transition={{ type: 'spring', stiffness: 120, duration: 1 }} // Ajusta la duración para suavidad
+    >
+      Edison Azogue
+    </motion.h1>
+  )}
+</AnimatePresence>
+
 
           <motion.p 
             className="text-xl font-varela text-blue-800/80 dark:text-teal-400/60 mb-4"

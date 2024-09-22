@@ -1,24 +1,56 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ExternalLink, Github } from 'lucide-react';
 
-const ProjectCard = ({ title, description, tags = [] }) => (
-  <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow duration-300">
-    <div className="p-6">
-      <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-2">{title}</h3>
-      <p className="text-gray-600 dark:text-gray-400 mb-4">{description}</p>
-      <div className="flex flex-wrap gap-2 mb-4">
-        {tags.map((tag, index) => (
-          <span key={index} className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-sm rounded-full">
-            {tag}
-          </span>
-        ))}
+const ProjectCard = ({ project, index, isHovered, setHoveredIndex, anyHovered }) => {
+  return (
+    <motion.div
+      className="group relative rounded-lg overflow-hidden transition-all duration-300 ease-in-out hover:bg-gray-800/10 dark:hover:bg-gray-700/20"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      onMouseEnter={() => setHoveredIndex(index)}
+      onMouseLeave={() => setHoveredIndex(null)}
+    >
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <div className="absolute inset-0 rounded-lg shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1)] group-hover:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1),_0_0_0_1px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:group-hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),_0_0_0_1px_rgba(255,255,255,0.1)]"></div>
       </div>
-      <button className="flex items-center text-blue-500 hover:text-blue-600 transition-colors duration-300">
-        Ver más
-        <ArrowRight size={16} className="ml-1" />
-      </button>
-    </div>
-  </div>
-);
+      <div className="flex">
+        <div className={`w-1/3 h-full overflow-hidden transition-opacity duration-300 ${anyHovered && !isHovered ? 'opacity-50' : ''}`}>
+          <img 
+            src={project.image} 
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+          />
+        </div>
+        <div className={`w-2/3 p-4 transition-opacity duration-300 ${anyHovered && !isHovered ? 'opacity-50' : ''}`}>
+          <h3 className="text-lg font-semibold mb-2 transition-colors duration-300 text-gray-900 group-hover:text-blue-800 dark:text-white dark:group-hover:text-teal-400">
+            {project.title}
+          </h3>
+          <p className="text-sm mb-3 line-clamp-2 text-gray-700 dark:text-gray-400">
+            {project.description}
+          </p>
+          <div className="flex flex-wrap items-center justify-between">
+            <div className="flex flex-wrap gap-2 mb-2">
+              {project.tags.map((tag, tagIndex) => (
+                <span key={tagIndex} className="px-2 py-1 text-xs rounded-full bg-blue-100/50 text-blue-800 dark:bg-teal-900/30 dark:text-teal-300">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div className="flex space-x-3">
+              <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-blue-800 hover:text-blue-500 dark:text-teal-400 dark:hover:text-teal-300 transition-colors">
+                <Github size={18} />
+              </a>
+              <a href={project.demo} target="_blank" rel="noopener noreferrer" className="text-blue-800 hover:text-blue-500 dark:text-teal-400 dark:hover:text-teal-300 transition-colors">
+                <ExternalLink size={18} />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export default ProjectCard;

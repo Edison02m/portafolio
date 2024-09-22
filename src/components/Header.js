@@ -18,7 +18,7 @@ const Header = () => {
   const navItems = ['Inicio', 'Sobre Mí', 'Proyectos', 'Contacto'];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md' : 'bg-transparent'}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-100/70 dark:bg-gray-900/60 backdrop-blur-md' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center font-varela">
         <a href="/" className="text-2xl font-bold text-gray-800 dark:text-white">
           <img src={logo} alt="Logo" className="h-8" />
