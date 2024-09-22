@@ -45,7 +45,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-16 px-4 font-varela">
+    <section id="projects" className="py-6 -pt-8 px-4 font-varela ">
       <div className="container mx-auto max-w-6xl">
         <motion.h2 
           className="text-3xl font-bold mb-10 text-center text-gray-900 dark:text-white"

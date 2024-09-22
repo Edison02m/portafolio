@@ -66,7 +66,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 relative">
+    <div className="App flex flex-col min-h-screen bg-gray-50 dark:bg-gray-950 relative">
       <InteractiveBackground mousePosition={mousePosition} />
 
       <div className="relative z-10">
@@ -79,15 +79,15 @@ function App() {
             </div>
           </BlurSection>
 
-          <BlurSection id="about">
+          <BlurSection id="sobre-mí">
             <About />
           </BlurSection>
 
-          <BlurSection id="projects">
+          <BlurSection id="proyectos">
             <Projects />
           </BlurSection>
 
-          <BlurSection id="contact">
+          <BlurSection id="contacto">
             <Contact />
           </BlurSection>
         </main>

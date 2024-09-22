@@ -115,7 +115,7 @@ const HomeAbout = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.7 }}
           >
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-varela">
+            <p className="text-gray-700 dark:text-gray-300 leading-relaxed font-varela px-6 sm:px-0">
               Apasionado por crear experiencias digitales únicas que fusionan 
               funcionalidad y estética. Siempre en busca de innovar y elevar 
               la calidad en cada proyecto de desarrollo web y diseño de interfaces.

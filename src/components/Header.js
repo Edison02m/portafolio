@@ -17,6 +17,17 @@ const Header = () => {
 
   const navItems = ['Inicio', 'Sobre Mí', 'Proyectos', 'Contacto'];
 
+  const handleScrollToSection = (e, sectionId) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop - 50, // Ajusta aquí el desplazamiento
+        behavior: 'smooth' // Desplazamiento suave
+      });
+    }
+  };
+
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-gray-100/70 dark:bg-gray-900/60 backdrop-blur-md' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center font-varela">
@@ -29,6 +40,7 @@ const Header = () => {
             <a
               key={index}
               href={`#${item.toLowerCase().replace(' ', '-')}`}
+              onClick={(e) => handleScrollToSection(e, item.toLowerCase().replace(' ', '-'))}
               className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300"
             >
               {item}
@@ -55,8 +67,11 @@ const Header = () => {
             <a
               key={index}
               href={`#${item.toLowerCase().replace(' ', '-')}`}
+              onClick={(e) => {
+                handleScrollToSection(e, item.toLowerCase().replace(' ', '-'));
+                setIsMenuOpen(false);
+              }}
               className="block py-3 px-4 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300"
-              onClick={() => setIsMenuOpen(false)}
             >
               {item}
             </a>
