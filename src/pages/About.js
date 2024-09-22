@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Typewriter } from 'react-simple-typewriter';
 import { FaPython, FaJs, FaReact, FaHtml5, FaCss3, FaDatabase } from 'react-icons/fa';
-import { SiFlask, SiTailwindcss, SiPostgresql, SiMysql, SiMicrosoftsqlserver, SiCplusplus, SiCsharp, SiC, SiSql } from 'react-icons/si';
+import { SiTailwindcss, SiPostgresql, SiMysql, SiMicrosoftsqlserver, SiCplusplus, SiCsharp, SiC } from 'react-icons/si';
 import { FiFigma } from 'react-icons/fi';
 import { TbArticle } from 'react-icons/tb';
 
