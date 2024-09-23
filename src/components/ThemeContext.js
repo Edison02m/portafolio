@@ -4,13 +4,13 @@ const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Inicializa el estado basado en localStorage o en un valor por defecto
+    // Verifica si hay un valor en localStorage, si no hay, establece modo oscuro por defecto
     const savedMode = localStorage.getItem('darkMode');
-    return savedMode === 'true'; // Si no hay, por defecto es false (modo claro)
+    return savedMode !== null ? savedMode === 'true' : true; // Modo oscuro por defecto
   });
 
   useEffect(() => {
-    // Establece el modo oscuro en el documento según el estado
+    // Aplica la clase 'dark' al documento según el estado
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
     } else {
@@ -18,7 +18,7 @@ export const ThemeProvider = ({ children }) => {
     }
     // Guarda el estado en localStorage
     localStorage.setItem('darkMode', isDarkMode);
-  }, [isDarkMode]); // Solo se ejecuta cuando isDarkMode cambia
+  }, [isDarkMode]);
 
   const toggleDarkMode = () => {
     setIsDarkMode(prevMode => !prevMode); // Alterna el estado

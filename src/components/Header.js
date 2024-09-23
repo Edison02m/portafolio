@@ -1,7 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Home, User, Briefcase, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 import logo from '../assets/icons/logo.webp';
+
+const iconMap = {
+  'Inicio': Home,
+  'Sobre Mí': User,
+  'Proyectos': Briefcase,
+  'Contacto': Mail
+};
+
+const MorphingNavItem = ({ text, href, onClick }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const Icon = iconMap[text];
+
+  return (
+    <motion.a
+      href={href}
+      onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="relative flex items-center justify-center w-24 h-10 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300"
+    >
+      <motion.span
+        initial={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: isHovered ? 0 : 1, scale: isHovered ? 0.5 : 1 }}
+        transition={{ duration: 0.3 }}
+        className="absolute"
+      >
+        {text}
+      </motion.span>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: isHovered ? 1 : 0, scale: isHovered ? 1 : 0.5 }}
+        transition={{ duration: 0.3 }}
+        className="absolute"
+      >
+        <Icon size={24} />
+      </motion.div>
+    </motion.a>
+  );
+};
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,12 +58,12 @@ const Header = () => {
   const navItems = ['Inicio', 'Sobre Mí', 'Proyectos', 'Contacto'];
 
   const handleScrollToSection = (e, sectionId) => {
-    e.preventDefault(); // Evita el comportamiento predeterminado
+    e.preventDefault();
     const section = document.getElementById(sectionId);
     if (section) {
       window.scrollTo({
-        top: section.offsetTop - 50, // Ajusta aquí el desplazamiento
-        behavior: 'smooth' // Desplazamiento suave
+        top: section.offsetTop - 50,
+        behavior: 'smooth'
       });
     }
   };
@@ -37,14 +77,12 @@ const Header = () => {
 
         <nav className="hidden md:flex space-x-8">
           {navItems.map((item, index) => (
-            <a
+            <MorphingNavItem
               key={index}
+              text={item}
               href={`#${item.toLowerCase().replace(' ', '-')}`}
               onClick={(e) => handleScrollToSection(e, item.toLowerCase().replace(' ', '-'))}
-              className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300"
-            >
-              {item}
-            </a>
+            />
           ))}
         </nav>
 
