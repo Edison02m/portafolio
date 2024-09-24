@@ -15,15 +15,17 @@ const ProjectCard = ({ project, index, isHovered, setHoveredIndex, anyHovered })
       <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <div className="absolute inset-0 rounded-lg shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1)] group-hover:shadow-[inset_0_1px_0_0_rgba(0,0,0,0.1),_0_0_0_1px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)] dark:group-hover:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1),_0_0_0_1px_rgba(255,255,255,0.1)]"></div>
       </div>
-      <div className="flex">
-        <div className={`w-1/3 h-full overflow-hidden transition-opacity duration-300 ${anyHovered && !isHovered ? 'opacity-50' : ''}`}>
-          <img 
-            src={project.image} 
-            alt={project.title}
-            className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
-          />
+      <div className="flex flex-col md:flex-row">
+        <div className={`w-full md:w-1/3 p-4 flex justify-center items-center transition-opacity duration-300 ${anyHovered && !isHovered ? 'opacity-50' : ''}`}>
+          <div className="w-48 h-24 overflow-hidden rounded-lg border-2 border-gray-600/10 group-hover:border-blue-800/30 dark:border-white/10 group-hover:border-2 group-hover:dark:border-white/30">
+            <img 
+              src={project.image} 
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
-        <div className={`w-2/3 p-4 transition-opacity duration-300 ${anyHovered && !isHovered ? 'opacity-50' : ''}`}>
+        <div className={`w-full md:w-2/3 p-4 transition-opacity duration-300 ${anyHovered && !isHovered ? 'opacity-50' : ''}`}>
           <h3 className="text-lg font-semibold mb-2 transition-colors duration-300 text-gray-900 group-hover:text-blue-800 dark:text-white dark:group-hover:text-teal-400">
             {project.title}
           </h3>

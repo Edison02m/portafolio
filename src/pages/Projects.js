@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
-import imagen from '../assets/icons/logo.webp';
 import raze from '../assets/icons/raze.webp';
 import gekko from '../assets/icons/gekko.webp';
 import yoru from '../assets/icons/yoru.webp';
+import ia_colorizer_iamge from '../assets/images/colorizacion-diagrama.svg';
 
 const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const projects = [
     {
-      title: "Sistema de Reservas",
-      description: "Gestión moderna de reservas con interfaz fluida y experiencia de usuario optimizada.",
-      tags: ["definir", "definir", "definir"],
-      image: imagen,
-      github: "https://github.com/yourusername/reservas",
-      demo: "https://reservas-demo.com"
+      title: "ColorizeAI: Colorización de Imágenes",
+      description: "Transforma imágenes en blanco y negro a color usando redes neuronales convolucionales (CNN).",
+      tags: ["Python"],
+      image: ia_colorizer_iamge,
+      github: "https://github.com/Edison02m/ia-colorizer"
     },
     {
       title: "Aplicación de Recetas",
