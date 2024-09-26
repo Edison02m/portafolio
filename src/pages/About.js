@@ -12,7 +12,7 @@ const About = () => {
 
   const experiences = [
     { year: '2021', description: 'Inicio de estudios en Ingeniería de Software' },
-    { year: '2023', description: 'nose ' },
+    { year: '2023', description: 'Continuación de los estudios ' },
     { year: '2024', description: 'Practicas en fundación ANEUPI' },
   ];
 
@@ -43,14 +43,14 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center font-varela px-4 sm:px-8 pt-8">
+    <div className="min-h-screen flex items-center justify-center font-varela px-4 sm:px-8">
       <motion.div
         className="max-w-7xl w-full overflow-hidden"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8 sm:px-12 pt-4 sm:pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8 sm:px-12">
           {/* Left column - About and Experience */}
           <div className="space-y-8">
             <motion.div

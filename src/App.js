@@ -19,7 +19,7 @@ function InteractiveBackground({ mousePosition }) {
         background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, ${
           isDarkMode
             ? 'rgba(59, 130, 246, 0.2)'
-            : 'rgba(90, 130, 160, 0.3)'
+            : 'rgba(90, 130, 160, 0.5)'
         }, rgba(0, 0, 0, 0.1))`,
         transition: 'background 0.1s ease',
       }}
@@ -74,25 +74,39 @@ function App() {
 
         <main className="">
           <BlurSection id="inicio">
-            <div className="flex flex-col justify-center items-center min-h-screen -mb-12">
+            <div className="flex flex-col justify-center items-center min-h-screen">
               <HomeAbout />
             </div>
           </BlurSection>
 
           <BlurSection id="sobre-mí">
+            <div className='pt-4'>
             <About />
+            </div>
+            
           </BlurSection>
 
           <BlurSection id="proyectos">
+          <div className='sm:pt-8 pt-12'>
             <Projects />
+            </div>
           </BlurSection>
 
           <BlurSection id="contacto">
-            <Contact />
-          </BlurSection>
-        </main>
+            <div className='sm:-mt-20 pt-8'>
 
-        <Footer />
+            <Contact />
+            </div>
+          
+          
+          </BlurSection>
+       
+
+        </main>
+        <div className='-mt-24 sm:-mt-0 '>
+
+<Footer />
+</div>
       </div>
     </div>
   );

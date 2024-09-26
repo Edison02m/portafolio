@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
-import raze from '../assets/icons/raze.webp';
-import gekko from '../assets/icons/gekko.webp';
-import yoru from '../assets/icons/yoru.webp';
 import ia_colorizer_iamge from '../assets/images/colorizacion-diagrama.svg';
+import construccion from '../assets/icons/contruccion.gif';
 
 const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -18,33 +16,33 @@ const Projects = () => {
       github: "https://github.com/Edison02m/ia-colorizer"
     },
     {
-      title: "Aplicación de Recetas",
-      description: "Búsqueda avanzada de recetas con experiencia visual única.",
+      title: "Coming soon",
+      description: "Este proyecto esta en desarrollo.",
       tags: ["definir", "definir", "definir"],
-      image: raze,
+      image: construccion,
       github: "https://github.com/yourusername/recetas",
       demo: "https://recetas-app.com"
     },
     {
-      title: "Galería de Imágenes",
-      description: "Galería minimalista con scroll infinito y carga optimizada.",
+      title: "Coming soon",
+      description: "Este proyecto esta en desarrollo",
       tags: ["definir", "definir", "definir"],
-      image: gekko,
+      image: construccion,
       github: "https://github.com/yourusername/galeria",
       demo: "https://galeria-imagenes.com"
     },
     {
-      title: "API",
-      description: "End point con diferentes estados",
+      title: "Coming soon",
+      description: "Este proyecto esta en desarrollo",
       tags: ["definir", "definir", "definir"],
-      image: yoru,
+      image: construccion,
       github: "https://github.com/yourusername/galeria",
       demo: "https://galeria-imagenes.com"
     },
   ];
 
   return (
-    <section id="projects" className="py-6 -pt-8 px-4 font-varela ">
+    <section id="projects" className=" px-4 font-varela ">
       <div className="container mx-auto max-w-6xl">
         <motion.h2 
           className="text-3xl font-bold mb-10 text-center text-gray-900 dark:text-white"

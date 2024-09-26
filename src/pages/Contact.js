@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaEnvelope, FaUserAlt, FaPaperPlane } from 'react-icons/fa';
+import Rubick from '../components/RubikCube'
 
 const ContactSection = () => {
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [mensaje, setMensaje] = useState('');
   const [error, setError] = useState('');
-  const [enviado, setEnviado] = useState(false);
+  const [, setEnviado] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
   const variants = {
@@ -44,13 +45,13 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="bg-gray-800/70 py-12">
-      <div className="max-w-md mx-auto">
-        <h2 className="text-teal-400 font-varela text-3xl mb-6">Contáctame</h2>
+    <section className="flex pb-24 sm:pb-0 ">
+      <div className="sm:max-w-md sm:mx-auto w-1/2 w-full mx-6 p-4 rounded-lg border-2 border-gray-600/10 hover:border-blue-800/30 dark:border-white/10 hover:border-2 hover:dark:border-white/30" >
+        <h2 className="text-black dark:text-white text-center font-varela text-3xl mb-6">Contáctame</h2>
 
         {showMessage && (
-          <div className="bg-gray-700/50 p-6 rounded-lg font-mono shadow-lg border border-teal-600/10 mb-6">
-            <p className="text-teal-400 font-varela text-center">¡Gracias por tu mensaje! Desarrollado con <span className="text-yellow-500">❤</span> por Edison Azogue.</p>
+          <div className="bg-gray-700/10 p-6 rounded-lg font-mono shadow-lg border dark:border-teal-600/10 border-blue-700 mb-6">
+            <p className="dark:text-teal-400 text-blue-800/70 font-varela text-center">¡Gracias por tu mensaje! pronto recibiras una respuesta ❤️</p>
           </div>
         )}
 
@@ -63,24 +64,24 @@ const ContactSection = () => {
           className="space-y-6"
         >
           <div className="relative">
-            <FaUserAlt className="absolute top-1/2 transform -translate-y-1/2 left-3 text-teal-400" />
+            <FaUserAlt className="absolute top-1/2 transform -translate-y-1/2 left-3 text-blue-700 dark:text-teal-400" />
             <input
               type="text"
               value={nombre}
               onChange={(e) => setNombre(e.target.value)}
-              className="w-full bg-gray-800/50 font-varela text-teal-500 border-0 border-b-2 border-teal-600 focus:outline-none focus:ring-0 focus:border-teal-400 transition-colors duration-300 pl-10 py-2"
+              className="w-full bg-gray-800/0 font-varela dark:text-white/80 text-gray-600 border-0 border-b-2 dark:border-teal-600 border-blue-700 focus:outline-none focus:ring-0 dark:focus:border-white focus:border-blue-700/50 transition-colors duration-300 pl-10 py-2"
               placeholder="Escribe tu nombre"
               required
             />
           </div>
 
           <div className="relative">
-            <FaEnvelope className="absolute top-1/2 transform -translate-y-1/2 left-3 text-teal-400" />
+            <FaEnvelope className="absolute top-1/2 transform -translate-y-1/2 left-3 text-blue-700 dark:text-teal-400" />
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-gray-800/50 font-varela text-teal-500 border-0 border-b-2 border-teal-600 focus:outline-none focus:ring-0 focus:border-teal-400 transition-colors duration-300 pl-10 py-2"
+              className="w-full bg-gray-800/0 font-varela dark:text-white/80 text-gray-600 border-0 border-b-2 dark:border-teal-600 border-blue-700 focus:outline-none focus:ring-0 dark:focus:border-white focus:border-blue-700/50 transition-colors duration-300 pl-10 py-2"
               placeholder="tucorreo@dominio.com"
               required
             />
@@ -90,7 +91,7 @@ const ContactSection = () => {
             <textarea
               value={mensaje}
               onChange={(e) => setMensaje(e.target.value)}
-              className="w-full bg-gray-800/50 font-varela text-teal-500 border-0 border-b-2 border-teal-600 focus:outline-none focus:ring-0 focus:border-teal-400 transition-colors duration-300 p-2"
+              className="w-full bg-gray-800/0 font-varela dark:text-white/80 text-gray-600 border-0 border-b-2 border-blue-700 dark:border-teal-600 focus:outline-none focus:ring-0 dark:focus:border-white focus:border-blue-700/50   transition-colors duration-300 p-2"
               rows="4"
               placeholder="Escribe tu mensaje"
               required
@@ -101,10 +102,10 @@ const ContactSection = () => {
 
           <div className="flex justify-center">
             <motion.button
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1 }}
               whileTap={{ scale: 0.95 }}
               type="submit"
-              className="bg-teal-600 font-varela text-gray-900 px-6 py-2 rounded-full shadow-md hover:bg-teal-500 hover:text-white transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-teal-400"
+              className="dark:bg-teal-600 bg-blue-700 hover:bg-blue-500 dark:hover:bg-teal-500 font-varela text-white/80 px-6 py-2 rounded-full shadow-md hover:text-white"
             >
               <div className="flex items-center justify-center">
                 <FaPaperPlane className="mr-2" />
@@ -114,6 +115,12 @@ const ContactSection = () => {
           </div>
         </motion.form>
       </div>
+      <div className='hidden md:flex items-center justify-center w-1/2'>
+      <div className="w-48 h-48">
+        <Rubick />
+      </div>
+</div>
+
     </section>
   );
 };
