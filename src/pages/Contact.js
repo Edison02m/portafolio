@@ -1,126 +1,113 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaEnvelope, FaUserAlt, FaPaperPlane } from 'react-icons/fa';
-import Rubick from '../components/RubikCube'
 
 const ContactSection = () => {
-  const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('');
-  const [mensaje, setMensaje] = useState('');
+  const [formData, setFormData] = useState({ nombre: '', email: '', mensaje: '' });
   const [error, setError] = useState('');
-  const [, setEnviado] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
-  const variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    fetch("https://formcarry.com/s/z7ll1aZc0Ya", {
-      method: 'POST',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ name: nombre, email: email, message: mensaje })
-    })
-      .then(response => response.json())
-      .then(response => {
-        if (response.code === 200) {
-          setEnviado(true);
-          setNombre('');
-          setEmail('');
-          setMensaje('');
-          setShowMessage(true);
-        } else {
-          setError(response.message || "Error al enviar el formulario.");
-        }
-      })
-      .catch(error => {
-        setError(error.message || "Error al enviar el formulario.");
+    try {
+      const response = await fetch("https://formcarry.com/s/z7ll1aZc0Ya", {
+        method: 'POST',
+        headers: { "Accept": "application/json", "Content-Type": "application/json" },
+        body: JSON.stringify(formData)
       });
+      const data = await response.json();
+      if (data.code === 200) {
+        setFormData({ nombre: '', email: '', mensaje: '' });
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 5000);
+      } else {
+        setError(data.message || "Error al enviar el formulario.");
+      }
+    } catch (error) {
+      setError(error.message || "Error al enviar el formulario.");
+    }
   };
 
   return (
-    <section className="flex pb-24 sm:pb-0 ">
-      <div className="sm:max-w-md sm:mx-auto w-1/2 w-full mx-6 p-4 rounded-lg border-2 border-gray-600/10 hover:border-blue-800/30 dark:border-white/10 hover:border-2 hover:dark:border-white/30" >
-        <h2 className="text-black dark:text-white text-center font-varela text-3xl mb-6">Contáctame</h2>
-
-        {showMessage && (
-          <div className="bg-gray-700/10 p-6 rounded-lg font-mono shadow-lg border dark:border-teal-600/10 border-blue-700 mb-6">
-            <p className="dark:text-teal-400 text-blue-800/70 font-varela text-center">¡Gracias por tu mensaje! pronto recibiras una respuesta ❤️</p>
-          </div>
-        )}
-
-        <motion.form
-          initial="hidden"
-          animate="visible"
-          variants={variants}
-          transition={{ duration: 0.8 }}
-          onSubmit={handleSubmit}
-          className="space-y-6"
-        >
+    <section className="flex flex-col md:flex-row items-center justify-center  px-4 transition-colors duration-300 font-varel">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-md mx-auto mb-8 md:mb-0"
+      >
+        <h2 className="text-3xl font-bold text-black dark:text-white mb-6 text-center font-varela">Contáctame</h2>
+        <p className="text-gray-600 dark:text-gray-300 text-center mb-8 font-varela ">
+          ¿Tienes alguna pregunta o propuesta? ¡No dudes en escribirme!
+        </p>
+        <AnimatePresence>
+          {showMessage && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="bg-green-100 dark:bg-green-900 p-4 rounded-lg shadow-lg mb-6"
+            >
+              <p className="text-green-800 dark:text-green-200 text-center font-medium font-varela ">
+                ¡Gracias por tu mensaje! Pronto recibirás una respuesta ❤️
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative">
-            <FaUserAlt className="absolute top-1/2 transform -translate-y-1/2 left-3 text-blue-700 dark:text-teal-400" />
+            <FaUserAlt className="absolute top-3 left-3 text-blue-700 dark:text-teal-400 " />
             <input
               type="text"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              className="w-full bg-gray-800/0 font-varela dark:text-white/80 text-gray-600 border-0 border-b-2 dark:border-teal-600 border-blue-700 focus:outline-none focus:ring-0 dark:focus:border-white focus:border-blue-700/50 transition-colors duration-300 pl-10 py-2"
-              placeholder="Escribe tu nombre"
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              className=" font-varela w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-2 border-blue-700 dark:border-teal-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 pl-10 py-2 transition-colors duration-300"
+              placeholder="Tu nombre"
               required
             />
           </div>
-
           <div className="relative">
-            <FaEnvelope className="absolute top-1/2 transform -translate-y-1/2 left-3 text-blue-700 dark:text-teal-400" />
+            <FaEnvelope className="absolute top-3 left-3 text-blue-700 dark:text-teal-400" />
             <input
               type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full bg-gray-800/0 font-varela dark:text-white/80 text-gray-600 border-0 border-b-2 dark:border-teal-600 border-blue-700 focus:outline-none focus:ring-0 dark:focus:border-white focus:border-blue-700/50 transition-colors duration-300 pl-10 py-2"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="font-varela w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-2 border-blue-700 dark:border-teal-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 pl-10 py-2 transition-colors duration-300"
               placeholder="tucorreo@dominio.com"
               required
             />
           </div>
-
           <div>
             <textarea
-              value={mensaje}
-              onChange={(e) => setMensaje(e.target.value)}
-              className="w-full bg-gray-800/0 font-varela dark:text-white/80 text-gray-600 border-0 border-b-2 border-blue-700 dark:border-teal-600 focus:outline-none focus:ring-0 dark:focus:border-white focus:border-blue-700/50   transition-colors duration-300 p-2"
+              name="mensaje"
+              value={formData.mensaje}
+              onChange={handleChange}
+              className="font-varela w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-2 border-blue-700 dark:border-teal-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-teal-500 p-3 transition-colors duration-300"
               rows="4"
-              placeholder="Escribe tu mensaje"
+              placeholder="Tu mensaje"
               required
             ></textarea>
           </div>
-
-          {error && <p className="text-red-500 text-sm">{error}</p>}
-
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
           <div className="flex justify-center">
             <motion.button
-              whileHover={{ scale: 1 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               type="submit"
-              className="dark:bg-teal-600 bg-blue-700 hover:bg-blue-500 dark:hover:bg-teal-500 font-varela text-white/80 px-6 py-2 rounded-full shadow-md hover:text-white"
+              className="font-varela bg-blue-700 hover:bg-blue-600 dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-colors duration-300 flex items-center"
             >
-              <div className="flex items-center justify-center">
-                <FaPaperPlane className="mr-2" />
-                <span>Enviar</span>
-              </div>
+              <FaPaperPlane className="mr-2" />
+              <span>Enviar mensaje</span>
             </motion.button>
           </div>
-        </motion.form>
-      </div>
-      <div className='hidden md:flex items-center justify-center w-1/2'>
-      <div className="w-48 h-48">
-        <Rubick />
-      </div>
-</div>
-
+        </form>
+      </motion.div>
     </section>
   );
 };

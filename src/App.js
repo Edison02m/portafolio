@@ -19,7 +19,7 @@ function InteractiveBackground({ mousePosition }) {
         background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, ${
           isDarkMode
             ? 'rgba(59, 130, 246, 0.2)'
-            : 'rgba(90, 130, 160, 0.5)'
+            : 'rgba(90, 130, 160, 0.3)'
         }, rgba(0, 0, 0, 0.1))`,
         transition: 'background 0.1s ease',
       }}

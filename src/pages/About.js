@@ -4,10 +4,11 @@ import { Typewriter } from 'react-simple-typewriter';
 import { FaPython, FaJs, FaReact, FaHtml5, FaCss3, FaDatabase } from 'react-icons/fa';
 import { SiTailwindcss, SiPostgresql, SiMysql, SiMicrosoftsqlserver, SiCplusplus, SiCsharp, SiC } from 'react-icons/si';
 import { FiFigma } from 'react-icons/fi';
-import { TbArticle } from 'react-icons/tb';
+import { TbArticle } from 'react-icons/tb'; 
+
 
 const About = () => {
-  const [activeTab, setActiveTab] = useState('Lenguajes de Programación');
+  const [activeTab, setActiveTab] = useState('Frontend');
   const [hoveredTech, setHoveredTech] = useState(null);
 
   const experiences = [
@@ -17,26 +18,24 @@ const About = () => {
   ];
 
   const technologies = {
-    'Lenguajes de Programación': [
-      { name: 'Python', icon: FaPython },
-      { name: 'JavaScript', icon: FaJs },
-      { name: 'C#', icon: SiCsharp },
-      { name: 'C++', icon: SiCplusplus },
-      { name: 'C', icon: SiC },
-      { name: 'SQL', icon: FaDatabase },
+    'Frontend': [
       { name: 'HTML5', icon: FaHtml5 },
       { name: 'CSS3', icon: FaCss3 },
-    ],
-    'Frameworks y Librerías': [
+      { name: 'JavaScript', icon: FaJs },
       { name: 'React', icon: FaReact },
       { name: 'Tailwind CSS', icon: SiTailwindcss },
     ],
-    'Bases de Datos': [
+    'Backend': [
+      { name: 'Python', icon: FaPython },
+      { name: 'C#', icon: SiCsharp },
+      { name: 'SQL', icon: FaDatabase },
       { name: 'PostgreSQL', icon: SiPostgresql },
       { name: 'MySQL', icon: SiMysql },
       { name: 'Microsoft SQL Server', icon: SiMicrosoftsqlserver },
     ],
-    'Herramientas de Diseño': [
+    'Otros': [
+      { name: 'C++', icon: SiCplusplus },
+      { name: 'C', icon: SiC },
       { name: 'Figma', icon: FiFigma },
       { name: 'Balsamiq', icon: TbArticle },
     ],
